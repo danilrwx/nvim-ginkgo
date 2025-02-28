@@ -80,7 +80,6 @@ function adapter.build_spec(args)
 	table.insert(cargs, report_directory)
 	table.insert(cargs, "--json-report")
 	table.insert(cargs, report_filename)
-	table.insert(cargs, "--silence-skips")
 
 	local position = args.tree:data()
 	local directory = position.path
