@@ -1,6 +1,7 @@
 local lib = require("neotest.lib")
 local plenary = require("plenary.path")
 local async = require("neotest.async")
+local types = require("neotest.types")
 local logger = require("neotest.logging")
 local utils = require("nvim-ginkgo.utils")
 
@@ -33,7 +34,9 @@ function adapter.is_test_file(file_path)
 
 	local file_path_segments = vim.split(file_path, plenary.path.sep)
 	local file_path_basename = file_path_segments[#file_path_segments]
-	return vim.endswith(file_path_basename, "_test.go")
+	local nodes = adapter.discover_positions(file_path)
+
+	return nodes ~= nil and vim.endswith(file_path_basename, "_test.go")
 end
 
 ---Given a file path, parse all the tests within it.
